@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 
 const index = require("./routes/index");
+const bodyParser = require("body-parser")
 const livros = require("./routes/livrosRoute");
+
+app.use(bodyParser.json());
 
 app.use(function (req, res, next) {
     res.header("Acess-Control-Allow-Origin", "*");
