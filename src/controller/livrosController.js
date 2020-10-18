@@ -58,8 +58,25 @@ const putLivros = (req, res) => {
         };
         console.log("Arquivo atualizado com sucesso!");
     });
-    
+
     res.status(200).send(livros);
+};
+
+const patchLivros = (req, res) => {
+    const id = req.params.id;
+    const atualizacao = req.body;
+
+    try {
+        const livroASerModificado = livros.find((livros) => livros.id == id);
+        console.log(Object.keys(atualizacao).forEach((chave) => {
+            livroASerModificado[chave] = atualizacao[chave];
+        }));
+
+        console.log(livros);
+        return res.status(200).send(livros);
+    } catch(err) {
+        return res.status(424).send({message : err})
+    }
 }
 
 module.exports = {
@@ -67,5 +84,6 @@ module.exports = {
     postLivros,
     deleteLivro,
     getAllCategotia,
-    putLivros
+    putLivros,
+    patchLivros
 };

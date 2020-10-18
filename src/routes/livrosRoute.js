@@ -8,6 +8,7 @@ router.get("/:categoria", controller.getAllCategotia)
 router.post("/", controller.postLivros);
 router.post("/livros", controller.postLivros);
 router.delete("/:id", controller.deleteLivro);
-router.put("/:id", controller.putLivros)
+router.put("/:id", controller.putLivros);
+router.patch("/:id", controller.patchLivros);
 
 module.exports = router;
