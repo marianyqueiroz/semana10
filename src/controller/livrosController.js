@@ -41,11 +41,31 @@ const getAllCategotia = (req, res) => {
     res.status(200).send(categoriaFiltrada);
 };
 
+const putLivros = (req, res) => {
+    const id = req.params.id;
+    const livroASerModificado = livros.find((livros) => livros.id == id);
+    console.log(livroASerModificado)
+    const livroAtualizado = req.body;
+    console.log(livroAtualizado);
+    const index = livros.indexOf(livroASerModificado);
+    console.log(index);
+    livros.splice(index, 1, livroAtualizado);
+    console.log(livros);
 
+    fs.writeFile("./src/model/livros.json", JSON.stringify(livros), "utf8", function(err) {
+        if (err) {
+            return res.status(424).send({message : err});
+        };
+        console.log("Arquivo atualizado com sucesso!");
+    });
+    
+    res.status(200).send(livros);
+}
 
 module.exports = {
     getAll,
     postLivros,
     deleteLivro,
-    getAllCategotia
+    getAllCategotia,
+    putLivros
 };
